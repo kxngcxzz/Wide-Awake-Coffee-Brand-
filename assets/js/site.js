@@ -116,6 +116,7 @@
       .replace(/"/g, '&quot;');
   };
   var keyOf = function (l) { return l.name + '|' + l.sub; };
+  var watchers = [];
 
   /* storage can throw outright in a locked-down browser, so every touch is guarded */
   var save = function () {
@@ -188,6 +189,8 @@
         setTimeout(function () { countEl.classList.remove('pop'); }, 300);
       }
     }
+
+    watchers.forEach(function (fn) { fn(); });
   };
 
   if (body) {
@@ -236,6 +239,36 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeBag(); closeSheet(); }
   });
+
+  /* The bag lives here. cart.html reads and nudges it through this, rather
+     than keeping a second copy that could drift out of step. */
+  window.WA_BAG = {
+    lines: function () {
+      return lines.map(function (l) {
+        return { name: l.name, sub: l.sub, img: l.img, amt: l.amt, qty: l.qty };
+      });
+    },
+    subtotal: function () {
+      return lines.reduce(function (t, l) { return t + l.qty * l.amt; }, 0);
+    },
+    nudge: function (idx, delta) {
+      var l = lines[idx];
+      if (!l) return;
+      l.qty = Math.min(99, l.qty + delta);
+      if (l.qty < 1) lines.splice(idx, 1);
+      save();
+      draw();
+    },
+    drop: function (idx) {
+      if (!lines[idx]) return;
+      lines.splice(idx, 1);
+      save();
+      draw();
+    },
+    empty: function () { lines = []; save(); draw(); },
+    onChange: function (fn) { watchers.push(fn); fn(); },
+    money: money
+  };
 
   /* another tab changed the bag */
   window.addEventListener('storage', function (e) {
