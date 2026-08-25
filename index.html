@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#1c1512">
 <meta property="og:title" content="Wide Awake Coffee Co.">
 <meta property="og:description" content="Coffee for people with things to do. Roasted Monday, with you Wednesday.">
-<meta property="og:image" content="assets/img/hero-espresso.jpg">
+<meta property="og:image" content="assets/img/hero-poster.jpg">
 <meta property="og:type" content="website">
 <link rel="preload" href="assets/fonts/young-serif-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist-500.woff2" as="font" type="font/woff2" crossorigin>
@@ -54,7 +54,13 @@
 <!-- hero -->
 <section class="hero">
   <div class="hero-media">
-    <img src="assets/img/hero-espresso.jpg" alt="Espresso extracting from a portafilter into a white cup" fetchpriority="high">
+    <video id="heroVid" autoplay muted loop playsinline preload="auto"
+      poster="assets/img/hero-poster.jpg"
+      aria-label="Espresso pouring from a bottomless portafilter into a cup">
+      <source src="assets/video/hero.webm" type="video/webm">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+      <img src="assets/img/hero-poster.jpg" alt="Espresso pouring from a bottomless portafilter into a cup" fetchpriority="high">
+    </video>
   </div>
   <div class="hero-scrim"></div>
   <div class="wrap hero-in">

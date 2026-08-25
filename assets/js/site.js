@@ -22,6 +22,22 @@
     rv.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- hero footage ----------
+     CSS cannot stop a video, so anyone who has asked for less motion gets it
+     paused on the first frame, which is the same picture as the poster. */
+  var vid = $('#heroVid');
+  if (vid) {
+    if (calm) {
+      vid.removeAttribute('autoplay');
+      vid.pause();
+      vid.currentTime = 0;
+    } else {
+      /* some browsers refuse autoplay until the user has interacted */
+      var play = vid.play();
+      if (play && play.catch) play.catch(function () {});
+    }
+  }
+
   /* ---------- header: solid past the hero, hide on the way down ---------- */
   var hdr = $('#hdr');
   if (hdr) {

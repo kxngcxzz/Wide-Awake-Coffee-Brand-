@@ -22,6 +22,8 @@ and size, an origin strip, tasting profile and a brew guide.
 Plain HTML, CSS and JavaScript. No React, no Tailwind, no jQuery, no build tooling.
 The whole site is two HTML files, one stylesheet and roughly two hundred lines of script.
 
+- Hero is a looping video, trimmed and cross faded so the loop has no seam,
+  with a still poster frame behind it for slow connections
 - One product template, `product.html?p=early` or `?p=later`, filled at runtime
   from a catalogue object, the way a theme would be filled from a CMS
 - Bag persists in `localStorage`, survives a reload, and syncs between open tabs
@@ -49,6 +51,7 @@ assets/js/site.js      cart, nav, reveals, carousel, accordion
 assets/css/            site.css, fonts.css
 assets/fonts/          self hosted woff2 subsets
 assets/img/            photography
+assets/video/          the hero loop, mp4 and webm
 ```
 
 Adding a third coffee means adding an object to `products.js`. No new HTML.
