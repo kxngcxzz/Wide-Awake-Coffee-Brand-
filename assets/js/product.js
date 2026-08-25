@@ -9,6 +9,9 @@
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var money = function (n) { return '£' + n.toFixed(2); };
+  var dim = function (o) {
+    return (o && o.w && o.h) ? ' width="' + o.w + '" height="' + o.h + '"' : '';
+  };
   var esc = function (s) {
     return String(s).replace(/&(?![a-z]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   };
@@ -42,7 +45,8 @@
   if (galMain) {
     var first = p.gallery[0];
     galMain.innerHTML =
-      '<img id="galImg" src="' + first.src + '" alt="' + esc(first.alt) + '">' +
+      '<img id="galImg" src="' + first.src + '" alt="' + esc(first.alt) + '"' +
+      dim(first) + ' fetchpriority="high">' +
       '<div class="mark' + (p.onDark ? ' on-dark' : '') + '" id="galMark">' + markHTML + '</div>';
   }
 
@@ -53,7 +57,7 @@
         ' data-src="' + g.src + '" data-alt="' + esc(g.alt) + '"' +
         (g.mark ? ' data-mark="1"' : '') +
         ' aria-label="' + esc(g.alt) + '">' +
-        '<img src="' + g.src + '" alt=""' +
+        '<img src="' + g.src + '" alt=""' + dim(g) + ' loading="lazy"' +
         (g.thumbPos ? ' style="object-position:' + g.thumbPos + '"' : '') + '></button>';
     }).join('');
 
@@ -187,7 +191,8 @@
         var amt = Math.round(o.sizes[0].amt * 85) / 100;
         return '<article class="card rv"' + delay + '>' +
           '<a class="shot" href="product.html?p=' + o.slug + '">' +
-            '<img src="' + o.gallery[0].src + '" alt="' + esc(o.gallery[0].alt) + '" loading="lazy">' +
+            '<img src="' + o.gallery[0].src + '" alt="' + esc(o.gallery[0].alt) + '"' +
+              dim(o.gallery[0]) + ' loading="lazy" decoding="async">' +
             '<div class="mark' + (o.onDark ? ' on-dark' : '') + '">' +
               '<div class="m1">WIDE<br>AWAKE</div><div class="m2">' + esc(o.name.toUpperCase()) + '</div>' +
             '</div>' +
@@ -212,7 +217,8 @@
 
       return '<article class="card rv"' + delay + '>' +
         '<div class="shot">' +
-          '<img src="' + o.img + '" alt="' + esc(o.alt) + '" loading="lazy"' +
+          '<img src="' + o.img + '" alt="' + esc(o.alt) + '"' + dim(o) +
+            ' loading="lazy" decoding="async"' +
             ' style="aspect-ratio:4/3;object-position:50% 50%">' + marks +
         '</div>' +
         '<div class="card-top"><h3>' + esc(o.name) + '</h3>' +

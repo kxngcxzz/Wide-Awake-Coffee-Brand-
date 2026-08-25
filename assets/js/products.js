@@ -17,10 +17,10 @@ window.WA_PRODUCTS = {
     onDark: true,
     markSub: 'DARK ROAST · COLOMBIA',
     gallery: [
-      { src: 'assets/img/bag-later.jpg',   alt: 'Wide Awake Later, dark roast, 250g',        mark: true, thumbPos: '50% 10%' },
-      { src: 'assets/img/roastery.jpg',    alt: 'Beans tipped into the cooling tray' },
-      { src: 'assets/img/mug-counter.jpg', alt: 'A mug of Later on a kitchen counter' },
-      { src: 'assets/img/pourover.jpg',    alt: 'Water poured over a paper filter', thumbPos: '50% 62%' }
+      { src: 'assets/img/bag-later.jpg',   alt: 'Wide Awake Later, dark roast, 250g',        mark: true, thumbPos: '50% 10%', w: 1160, h: 2074 },
+      { src: 'assets/img/roastery.jpg',    alt: 'Beans tipped into the cooling tray', w: 1200, h: 896 },
+      { src: 'assets/img/mug-counter.jpg', alt: 'A mug of Later on a kitchen counter', w: 1200, h: 896 },
+      { src: 'assets/img/pourover.jpg',    alt: 'Water poured over a paper filter', thumbPos: '50% 62%', w: 1200, h: 896 }
     ],
     grinds: ['Whole bean', 'Espresso', 'Filter', 'Cafetière'],
     sizes: [
@@ -69,10 +69,10 @@ window.WA_PRODUCTS = {
     onDark: false,
     markSub: 'LIGHT ROAST · ETHIOPIA',
     gallery: [
-      { src: 'assets/img/bag-early.jpg', alt: 'Wide Awake Early, light roast, 250g',   mark: true, thumbPos: '50% 12%' },
-      { src: 'assets/img/pourover.jpg',  alt: 'Early brewed as a pour over', thumbPos: '50% 62%' },
-      { src: 'assets/img/mug-hands.jpg', alt: 'Two hands around a mug of Early' },
-      { src: 'assets/img/roastery.jpg',  alt: 'Beans cooling after the Monday roast' }
+      { src: 'assets/img/bag-early.jpg', alt: 'Wide Awake Early, light roast, 250g',   mark: true, thumbPos: '50% 12%', w: 1160, h: 2280 },
+      { src: 'assets/img/pourover.jpg',  alt: 'Early brewed as a pour over', thumbPos: '50% 62%', w: 1200, h: 896 },
+      { src: 'assets/img/mug-hands.jpg', alt: 'Two hands around a mug of Early', w: 1200, h: 896 },
+      { src: 'assets/img/roastery.jpg',  alt: 'Beans cooling after the Monday roast', w: 1200, h: 896 }
     ],
     grinds: ['Whole bean', 'Filter', 'AeroPress', 'Espresso'],
     sizes: [
@@ -116,7 +116,7 @@ window.WA_PRODUCTS = {
     sub:  'Early and Later, 250g each',
     blurb: 'Both roasts, one box. The easiest way to pick a side.',
     amt: 22,
-    img: 'assets/img/bags.jpg',
+    img: 'assets/img/bags.jpg', w: 1600, h: 1194,
     alt: 'Both Wide Awake roasts together',
     bothMarks: true
   },
@@ -127,7 +127,7 @@ window.WA_PRODUCTS = {
     sub:  'Later, 500g',
     blurb: 'Whichever roast you drink most, in a bigger bag. Cheaper per cup.',
     amt: 18,
-    img: 'assets/img/roastery.jpg',
+    img: 'assets/img/roastery.jpg', w: 1200, h: 896,
     alt: 'Beans cooling after the roast'
   }
 };
