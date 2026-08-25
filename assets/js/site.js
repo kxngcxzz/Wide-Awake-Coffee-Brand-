@@ -100,12 +100,48 @@
     $$('a', sheet).forEach(function (a) { a.addEventListener('click', closeSheet); });
   }
 
-  /* ---------- bag ---------- */
+  /* ---------- bag ----------
+     Lines are keyed on name plus options, so Later as whole bean 250g and
+     Later ground 500g are two lines rather than one confused one. The whole
+     thing is mirrored into localStorage on every change, and other open tabs
+     pick it up through the storage event. */
+  var KEY = 'wa.bag.v1';
   var lines = [];
   var drawer = $('#drawer'), scrim = $('#scrim');
   var body = $('#drawerBody'), totalEl = $('#total'), countEl = $('#bagCount');
 
   var money = function (n) { return '£' + n.toFixed(2); };
+  var esc = function (t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  };
+  var keyOf = function (l) { return l.name + '|' + l.sub; };
+
+  /* storage can throw outright in a locked-down browser, so every touch is guarded */
+  var save = function () {
+    try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch (e) {}
+  };
+
+  var load = function () {
+    var raw;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    var parsed;
+    try { parsed = JSON.parse(raw); } catch (e) { return; }
+    if (!Array.isArray(parsed)) return;
+    lines = parsed.filter(function (l) {
+      return l && typeof l.name === 'string' && typeof l.img === 'string' &&
+             isFinite(l.amt) && isFinite(l.qty) && l.qty > 0;
+    }).map(function (l) {
+      return {
+        name: String(l.name),
+        sub:  String(l.sub || ''),
+        img:  String(l.img),
+        amt:  Number(l.amt),
+        qty:  Math.min(99, Math.max(1, Math.round(Number(l.qty))))
+      };
+    });
+  };
 
   var openBag = function () {
     if (!drawer) return;
@@ -120,34 +156,37 @@
     document.body.style.overflow = '';
   };
 
-  var draw = function () {
-    if (!body) return;
+  var draw = function (pop) {
     var count = 0, total = 0;
     lines.forEach(function (l) { count += l.qty; total += l.qty * l.amt; });
 
-    if (!lines.length) {
-      body.innerHTML = '<p class="drawer-empty">Nothing in here yet.</p>';
-    } else {
-      body.innerHTML = lines.map(function (l, idx) {
-        return '<div class="line">' +
-          '<img src="' + l.img + '" alt="">' +
-          '<span><b>' + l.name + '</b><em>' + l.sub + '</em>' +
-            '<span class="qty">' +
-              '<button data-i="' + idx + '" data-d="-1" aria-label="One fewer">−</button>' +
-              '<span>' + l.qty + '</span>' +
-              '<button data-i="' + idx + '" data-d="1" aria-label="One more">+</button>' +
+    if (body) {
+      if (!lines.length) {
+        body.innerHTML = '<p class="drawer-empty">Nothing in here yet.</p>';
+      } else {
+        body.innerHTML = lines.map(function (l, idx) {
+          return '<div class="line">' +
+            '<img src="' + esc(l.img) + '" alt="">' +
+            '<span><b>' + esc(l.name) + '</b><em>' + esc(l.sub) + '</em>' +
+              '<span class="qty">' +
+                '<button data-i="' + idx + '" data-d="-1" aria-label="One fewer ' + esc(l.name) + '">−</button>' +
+                '<span>' + l.qty + '</span>' +
+                '<button data-i="' + idx + '" data-d="1" aria-label="One more ' + esc(l.name) + '">+</button>' +
+              '</span>' +
             '</span>' +
-          '</span>' +
-          '<span class="amt">' + money(l.qty * l.amt) + '</span>' +
-        '</div>';
-      }).join('');
+            '<span class="amt">' + money(l.qty * l.amt) + '</span>' +
+          '</div>';
+        }).join('');
+      }
     }
 
     if (totalEl) totalEl.textContent = money(total);
     if (countEl) {
       countEl.textContent = count;
-      countEl.classList.add('pop');
-      setTimeout(function () { countEl.classList.remove('pop'); }, 300);
+      if (pop && !calm) {
+        countEl.classList.add('pop');
+        setTimeout(function () { countEl.classList.remove('pop'); }, 300);
+      }
     }
   };
 
@@ -159,28 +198,35 @@
       if (!l) return;
       l.qty += +b.dataset.d;
       if (l.qty < 1) lines.splice(+b.dataset.i, 1);
+      save();
       draw();
     });
   }
 
-  $$('.add').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var name = btn.dataset.name;
-      var found = null;
-      lines.forEach(function (l) { if (l.name === name) found = l; });
-      if (found) { found.qty++; }
-      else {
-        lines.push({
-          name: name,
-          sub:  btn.dataset.sub,
-          img:  btn.dataset.img,
-          amt:  parseFloat(btn.dataset.amt),
-          qty:  1
-        });
-      }
-      draw();
-      openBag();
-    });
+  var addLine = function (btn) {
+    var line = {
+      name: btn.dataset.name,
+      sub:  btn.dataset.sub || '',
+      img:  btn.dataset.img,
+      amt:  parseFloat(btn.dataset.amt),
+      qty:  1
+    };
+    if (!line.name || !isFinite(line.amt)) return;
+
+    var found = null;
+    lines.forEach(function (l) { if (keyOf(l) === keyOf(line)) found = l; });
+    if (found) found.qty = Math.min(99, found.qty + 1);
+    else lines.push(line);
+
+    save();
+    draw(true);
+    openBag();
+  };
+
+  /* delegated, so lines rendered later by product.js are covered too */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.add');
+    if (btn) addLine(btn);
   });
 
   var bagBtn = $('#bagBtn'), dClose = $('#drawerClose');
@@ -190,6 +236,16 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeBag(); closeSheet(); }
   });
+
+  /* another tab changed the bag */
+  window.addEventListener('storage', function (e) {
+    if (e.key !== KEY) return;
+    load();
+    draw();
+  });
+
+  load();
+  draw();
 
   /* ---------- newsletter ---------- */
   var form = $('#signup');
@@ -202,24 +258,19 @@
     });
   }
 
-  /* ---------- product page: option pickers ---------- */
+  /* ---------- product page: option pickers ----------
+     Selection only. product.js owns what the price does about it. */
   $$('[data-group]').forEach(function (group) {
     group.addEventListener('click', function (e) {
       var opt = e.target.closest('.opt');
       if (!opt) return;
-      $$('.opt', group).forEach(function (o) { o.classList.remove('sel'); });
+      $$('.opt', group).forEach(function (o) {
+        o.classList.remove('sel');
+        o.setAttribute('aria-pressed', 'false');
+      });
       opt.classList.add('sel');
-      if (opt.dataset.amt) window.dispatchEvent(
-        new CustomEvent('wa:price', { detail: parseFloat(opt.dataset.amt) })
-      );
+      opt.setAttribute('aria-pressed', 'true');
     });
   });
 
-  window.addEventListener('wa:price', function (e) {
-    var amt = e.detail;
-    $$('[data-live-price]').forEach(function (el) { el.textContent = money(amt); });
-    $$('.add').forEach(function (b) { if (b.dataset.live) b.dataset.amt = amt; });
-    var cta = $('#buyLabel');
-    if (cta) cta.textContent = 'Add to bag · ' + money(amt);
-  });
 })();

@@ -22,6 +22,10 @@ and size, an origin strip, tasting profile and a brew guide.
 Plain HTML, CSS and JavaScript. No React, no Tailwind, no jQuery, no build tooling.
 The whole site is two HTML files, one stylesheet and roughly two hundred lines of script.
 
+- One product template, `product.html?p=early` or `?p=later`, filled at runtime
+  from a catalogue object, the way a theme would be filled from a CMS
+- Bag persists in `localStorage`, survives a reload, and syncs between open tabs
+  through the `storage` event
 - Layout with CSS grid and flexbox, fluid type with `clamp()`
 - Product wordmarks set live over the photography using container query units, so the
   type scales with the image at any size instead of being baked into a JPEG
@@ -37,13 +41,17 @@ The whole site is two HTML files, one stylesheet and roughly two hundred lines o
 ## Files
 
 ```
-index.html          homepage
-product.html        product detail page
-assets/css/         site.css, fonts.css
-assets/js/site.js   all behaviour
-assets/fonts/       self hosted woff2 subsets
-assets/img/         photography
+index.html             homepage
+product.html           product template, reads ?p= from the URL
+assets/js/products.js  the catalogue
+assets/js/product.js   fills the template from it
+assets/js/site.js      cart, nav, reveals, carousel, accordion
+assets/css/            site.css, fonts.css
+assets/fonts/          self hosted woff2 subsets
+assets/img/            photography
 ```
+
+Adding a third coffee means adding an object to `products.js`. No new HTML.
 
 ## Running it
 

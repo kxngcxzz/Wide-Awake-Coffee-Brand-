@@ -32,7 +32,7 @@
   <div class="wrap hdr-in">
     <a class="brand" href="index.html"><i></i>WIDE AWAKE</a>
     <nav class="nav" aria-label="Main">
-      <a href="product.html">Coffee</a>
+      <a href="#range">Coffee</a>
       <a href="#subscription">Subscribe</a>
       <a href="#proof">Our roast</a>
       <a href="#faq">Questions</a>
@@ -173,41 +173,41 @@
 
     <div class="cards">
       <article class="card rv" data-sku="early">
-        <div class="shot">
+        <a class="shot" href="product.html?p=early" aria-label="Early, light roast">
           <img src="assets/img/bag-early.jpg" alt="Wide Awake Early, light roast, 250g" loading="lazy">
           <div class="mark">
             <div class="m1">WIDE<br>AWAKE</div>
             <div class="m2">EARLY</div>
             <div class="m3">LIGHT ROAST</div>
           </div>
-        </div>
+        </a>
         <div class="card-top">
-          <h3>Early</h3>
+          <h3><a href="product.html?p=early">Early</a></h3>
           <span class="price" data-price>£10.20 / bag</span>
         </div>
         <p>Washed Ethiopian, roasted light. Bright and a bit floral, the sort of cup that makes
            you sit up. Best as filter or in an AeroPress.</p>
         <div class="chips"><span class="chip">Yirgacheffe</span><span class="chip">Filter</span><span class="chip">1,850m</span></div>
-        <button class="btn btn-primary btn-block add" data-name="Early" data-sub="Light roast, 250g" data-img="assets/img/bag-early.jpg" data-amt="10.2">Add Early</button>
+        <button class="btn btn-primary btn-block add" data-name="Early" data-sub="Light roast &middot; Whole bean &middot; 250g &middot; subscription" data-img="assets/img/bag-early.jpg" data-amt="10.2">Add Early</button>
       </article>
 
       <article class="card rv" data-sku="later" style="transition-delay:.09s">
-        <div class="shot">
+        <a class="shot" href="product.html?p=later" aria-label="Later, dark roast">
           <img src="assets/img/bag-later.jpg" alt="Wide Awake Later, dark roast, 250g" loading="lazy">
           <div class="mark on-dark">
             <div class="m1">WIDE<br>AWAKE</div>
             <div class="m2">LATER</div>
             <div class="m3">DARK ROAST</div>
           </div>
-        </div>
+        </a>
         <div class="card-top">
-          <h3>Later</h3>
+          <h3><a href="product.html?p=later">Later</a></h3>
           <span class="price" data-price>£10.20 / bag</span>
         </div>
         <p>Colombian, roasted long. Chocolate, cooked sugar, no sharp edges. Holds its own
            against milk, which is the point.</p>
         <div class="chips"><span class="chip">Huila</span><span class="chip">Espresso</span><span class="chip">1,600m</span></div>
-        <button class="btn btn-dark btn-block add" data-name="Later" data-sub="Dark roast, 250g" data-img="assets/img/bag-later.jpg" data-amt="10.2">Add Later</button>
+        <button class="btn btn-dark btn-block add" data-name="Later" data-sub="Dark roast &middot; Whole bean &middot; 250g &middot; subscription" data-img="assets/img/bag-later.jpg" data-amt="10.2">Add Later</button>
       </article>
     </div>
   </div>
@@ -404,7 +404,7 @@
       </div>
       <div class="ftr-col">
         <h5>Shop</h5>
-        <a href="product.html">Early</a><a href="product.html">Later</a>
+        <a href="product.html?p=early">Early</a><a href="product.html?p=later">Later</a>
         <a href="#range">Starter pair</a><a href="#">Gift subscription</a>
       </div>
       <div class="ftr-col">
@@ -431,7 +431,7 @@
     <span class="brand"><i></i>WIDE AWAKE</span>
     <button id="sheetClose" aria-label="Close menu" style="font-size:30px;line-height:1">×</button>
   </div>
-  <a href="product.html">Coffee</a>
+  <a href="#range">Coffee</a>
   <a href="#subscription">Subscribe</a>
   <a href="#proof">Our roast</a>
   <a href="#faq">Questions</a>
@@ -456,6 +456,7 @@
   </div>
 </aside>
 
+<script src="assets/js/products.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

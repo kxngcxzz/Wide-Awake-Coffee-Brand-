@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Later — dark roast, Colombian Huila | Wide Awake Coffee Co.</title>
+<title>Later, dark roast from Colombian Huila | Wide Awake Coffee Co.</title>
 <meta name="description" content="Colombian Huila, roasted long and slow. Chocolate, cooked sugar and no sharp edges. Roasted Monday, with you Wednesday.">
 <meta name="theme-color" content="#f5efe4">
+<link rel="canonical" href="product.html?p=later">
 <link rel="preload" href="assets/fonts/young-serif-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23e0521c'/></svg>">
@@ -15,9 +16,9 @@
 
 <div class="ann">
   <div class="ann-track" id="annTrack">
-    <div class="ann-item">Roasted Monday, shipped Tuesday <span>•</span> Free delivery over £30</div>
-    <div class="ann-item">Skip or cancel any time <span>•</span> No minimum, no phone call</div>
-    <div class="ann-item">Compostable bags <span>•</span> Carbon-neutral delivery</div>
+    <div class="ann-item">Roasted Monday, shipped Tuesday <span>&bull;</span> Free delivery over &pound;30</div>
+    <div class="ann-item">Skip or cancel any time <span>&bull;</span> No minimum, no phone call</div>
+    <div class="ann-item">Compostable bags <span>&bull;</span> Carbon-neutral delivery</div>
   </div>
 </div>
 
@@ -25,7 +26,7 @@
   <div class="wrap hdr-in">
     <a class="brand" href="index.html"><i></i>WIDE AWAKE</a>
     <nav class="nav" aria-label="Main">
-      <a href="product.html">Coffee</a>
+      <a href="index.html#range">Coffee</a>
       <a href="index.html#subscription">Subscribe</a>
       <a href="index.html#proof">Our roast</a>
       <a href="index.html#faq">Questions</a>
@@ -41,93 +42,73 @@
 <main id="main">
 
 <div class="wrap crumbs">
-  <a href="index.html">Coffee</a> &nbsp;/&nbsp; Dark roast &nbsp;/&nbsp; <span style="color:var(--ink)">Later</span>
+  <a href="index.html#range">Coffee</a> &nbsp;/&nbsp;
+  <span id="crumbTag">Dark roast</span> &nbsp;/&nbsp;
+  <span id="crumbNow" style="color:var(--ink)">Later</span>
 </div>
 
 <div class="wrap buy">
 
-  <!-- gallery -->
+  <!-- gallery, filled by product.js -->
   <div class="gal">
-    <div class="gal-main">
+    <div class="gal-main" id="galMain">
       <img id="galImg" src="assets/img/bag-later.jpg" alt="Wide Awake Later, dark roast, 250g">
       <div class="mark on-dark" id="galMark">
         <div class="m1">WIDE<br>AWAKE</div>
         <div class="m2">LATER</div>
-        <div class="m3">DARK ROAST · COLOMBIA</div>
+        <div class="m3">DARK ROAST &middot; COLOMBIA</div>
       </div>
     </div>
-    <div class="thumbs" id="thumbs">
-      <button class="sel" data-src="assets/img/bag-later.jpg" data-mark="1" aria-label="The bag">
-        <img src="assets/img/bag-later.jpg" alt="" style="object-position:50% 10%"></button>
-      <button data-src="assets/img/roastery.jpg" aria-label="On the drum">
-        <img src="assets/img/roastery.jpg" alt=""></button>
-      <button data-src="assets/img/mug-counter.jpg" aria-label="In the cup">
-        <img src="assets/img/mug-counter.jpg" alt=""></button>
-      <button data-src="assets/img/pourover.jpg" aria-label="Brewing">
-        <img src="assets/img/pourover.jpg" alt="" style="object-position:50% 62%"></button>
-    </div>
+    <div class="thumbs" id="thumbs"></div>
   </div>
 
   <!-- buy box -->
   <div class="pdp">
-    <div class="rating"><span class="stars" style="color:var(--ember);letter-spacing:.18em">★★★★★</span> 4.8 · 612 reviews</div>
-    <h1>Later</h1>
-    <p>Colombian Huila, roasted long and slow. Chocolate, cooked sugar and no sharp edges.
-       The one that holds up to milk.</p>
+    <div class="rating">
+      <span class="stars" style="color:var(--ember);letter-spacing:.18em">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span id="pRating">4.8 &middot; 612 reviews</span>
+    </div>
+    <h1 id="pName">Later</h1>
+    <p id="pBlurb">Colombian Huila, roasted long and slow. Chocolate, cooked sugar and no sharp
+      edges. The one that holds up to milk.</p>
 
     <div class="price-row">
-      <span class="price-big" data-live-price>£10.20</span>
+      <span class="price-big" data-live-price>&pound;10.20</span>
       <small id="priceNote">per bag on subscription, save 15%</small>
     </div>
 
     <div class="field" data-group="how">
-      <span>How often</span>
-      <div class="opts two">
-        <button class="opt sel" data-amt="10.2" data-note="per bag on subscription, save 15%">Subscribe<em>Save 15%, skip any time</em></button>
-        <button class="opt" data-amt="12" data-note="one bag, no commitment">One time<em>£12.00 the bag</em></button>
-      </div>
+      <span id="howLabel">How often</span>
+      <div class="opts two" id="howOpts" role="group" aria-labelledby="howLabel"></div>
     </div>
 
     <div class="field" data-group="grind">
-      <span>Grind</span>
-      <div class="opts four">
-        <button class="opt sel">Whole bean</button>
-        <button class="opt">Espresso</button>
-        <button class="opt">Filter</button>
-        <button class="opt">Cafetière</button>
-      </div>
+      <span id="grindLabel">Grind</span>
+      <div class="opts four" id="grindOpts" role="group" aria-labelledby="grindLabel"></div>
     </div>
 
     <div class="field" data-group="size">
-      <span>Size</span>
-      <div class="opts three">
-        <button class="opt sel">250g</button>
-        <button class="opt">500g</button>
-        <button class="opt">1kg</button>
-      </div>
+      <span id="sizeLabel">Size</span>
+      <div class="opts three" id="sizeOpts" role="group" aria-labelledby="sizeLabel"></div>
     </div>
 
-    <button class="btn btn-primary btn-block add" data-live="1" data-name="Later"
-      data-sub="Dark roast, 250g" data-img="assets/img/bag-later.jpg" data-amt="10.2">
-      <span id="buyLabel">Add to bag · £10.20</span>
+    <button class="btn btn-primary btn-block add" id="addBtn"
+      data-name="Later" data-sub="Dark roast &middot; Whole bean &middot; 250g &middot; subscription"
+      data-img="assets/img/bag-later.jpg" data-amt="10.2">
+      <span id="buyLabel">Add to bag &middot; &pound;10.20</span>
     </button>
 
     <div class="assure">
-      <div><i>✓</i>Roasted Monday, with you Wednesday</div>
-      <div><i>✓</i>Free delivery over £30, letterbox sized</div>
-      <div><i>✓</i>Not for you? First bag is on us</div>
+      <div><i>&#10003;</i>Roasted Monday, with you Wednesday</div>
+      <div><i>&#10003;</i>Free delivery over &pound;30, letterbox sized</div>
+      <div><i>&#10003;</i>Not for you? First bag is on us</div>
     </div>
   </div>
 </div>
 
 <!-- origin strip -->
 <div class="wrap">
-  <div class="origin">
-    <div><span>Origin</span><b>Huila</b><em>Colombia, 1,600m</em></div>
-    <div><span>Process</span><b>Washed</b><em>Caturra &amp; Castillo</em></div>
-    <div><span>Roast level</span><b>Dark</b><em>Second crack, just past</em></div>
-    <div><span>We paid</span><b>£4.85/kg</b><em>2.4× the fairtrade floor</em></div>
-  </div>
+  <div class="origin" id="origin"></div>
 </div>
 
 <!-- tasting -->
@@ -135,16 +116,10 @@
   <div class="wrap taste rv">
     <div class="sec-head">
       <span class="eyebrow mono">How it tastes</span>
-      <h2>Dark, but not burnt.</h2>
-      <p class="lede">We pull it just past second crack, which is where most dark roasts go wrong
-        and keep going. You get the body and the sweetness without the ashtray finish.</p>
+      <h2 id="tasteHead">Dark, but not burnt.</h2>
+      <p class="lede" id="tasteLede"></p>
     </div>
-    <div class="bars">
-      <div class="bar"><span>Body <em>Heavy</em></span><i><b style="--w:88%"></b></i></div>
-      <div class="bar"><span>Acidity <em>Low</em></span><i><b style="--w:26%"></b></i></div>
-      <div class="bar"><span>Sweetness <em>High</em></span><i><b style="--w:78%"></b></i></div>
-      <div class="bar"><span>Roast <em>Dark</em></span><i><b style="--w:82%"></b></i></div>
-    </div>
+    <div class="bars" id="bars"></div>
   </div>
 </section>
 
@@ -153,75 +128,31 @@
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow mono">Start here</span>
-      <h2>Espresso, 1:2</h2>
-      <p class="lede">A starting point, not a rule. Adjust the grind before you adjust anything else.</p>
+      <h2 id="brewHead">Espresso, 1:2</h2>
+      <p class="lede" id="brewLede"></p>
     </div>
-    <div class="brew rv">
-      <div><span>Dose</span><b>18g</b></div>
-      <div><span>Yield</span><b>36g</b></div>
-      <div><span>Time</span><b>28 to 32s</b></div>
-      <div><span>Water</span><b>93°C</b></div>
-    </div>
+    <div class="brew rv" id="brew"></div>
     <a class="slide-link rv" href="#" style="margin-top:28px">All brew guides</a>
   </div>
 </section>
 
-<!-- also -->
+<!-- goes well with -->
 <section class="sec ground">
   <div class="wrap">
     <div class="sec-head rv" style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;max-width:none">
       <h2>Goes well with</h2>
       <a href="index.html#range" style="font-weight:600;font-size:16px;border-bottom:2px solid var(--ember);padding-bottom:3px">Everything else</a>
     </div>
-    <div class="also">
-      <article class="card rv">
-        <div class="shot">
-          <img src="assets/img/bag-early.jpg" alt="Wide Awake Early, light roast" loading="lazy">
-          <div class="mark"><div class="m1">WIDE<br>AWAKE</div><div class="m2">EARLY</div></div>
-        </div>
-        <div class="card-top"><h3>Early</h3><span class="price">£12.00</span></div>
-        <p>The light one. Ethiopian, bright, best as filter.</p>
-        <button class="btn btn-ghost btn-block add" data-name="Early" data-sub="Light roast, 250g"
-          data-img="assets/img/bag-early.jpg" data-amt="12">Add Early</button>
-      </article>
-      <article class="card rv" style="transition-delay:.09s">
-        <div class="shot">
-          <img src="assets/img/bags.jpg" alt="Both Wide Awake roasts together" loading="lazy"
-            style="aspect-ratio:4/3;object-position:50% 50%">
-          <div class="mark" style="left:26.2%;width:21.4%;top:41%">
-            <div class="m1" style="font-size:1.5cqw">WIDE<br>AWAKE</div>
-            <div class="m2" style="font-size:3.4cqw;margin-top:1.1cqw">EARLY</div>
-          </div>
-          <div class="mark on-dark" style="left:52.8%;width:23.2%;top:34.5%">
-            <div class="m1" style="font-size:1.5cqw">WIDE<br>AWAKE</div>
-            <div class="m2" style="font-size:3.4cqw;margin-top:1.1cqw">LATER</div>
-          </div>
-        </div>
-        <div class="card-top"><h3>Starter pair</h3><span class="price">£22.00</span></div>
-        <p>Both roasts, one box. The easiest way to pick a side.</p>
-        <button class="btn btn-ghost btn-block add" data-name="Starter pair" data-sub="Early and Later, 250g each"
-          data-img="assets/img/bags.jpg" data-amt="22">Add the pair</button>
-      </article>
-      <article class="card rv" style="transition-delay:.18s">
-        <div class="shot">
-          <img src="assets/img/roastery.jpg" alt="Beans cooling after the roast" loading="lazy"
-            style="aspect-ratio:4/3;object-position:50% 50%">
-        </div>
-        <div class="card-top"><h3>The 500g bag</h3><span class="price">£18.00</span></div>
-        <p>Whichever roast you drink most, in a bigger bag. Cheaper per cup.</p>
-        <button class="btn btn-ghost btn-block add" data-name="The 500g bag" data-sub="Later, 500g"
-          data-img="assets/img/roastery.jpg" data-amt="18">Add the 500g</button>
-      </article>
-    </div>
+    <div class="also" id="also"></div>
   </div>
 </section>
 
 <section class="cta">
   <div class="wrap">
     <h2>Start with a bag. See what happens.</h2>
-    <p>Try both roasts for £22, delivered. Cancel before the second box if it is not for you.</p>
+    <p>Try both roasts for &pound;22, delivered. Cancel before the second box if it is not for you.</p>
     <a class="btn btn-light btn-lg" href="index.html#range">Get the starter pair</a>
-    <small>Free delivery over £30 · Skip any week · No minimum</small>
+    <small>Free delivery over &pound;30 &middot; Skip any week &middot; No minimum</small>
   </div>
 </section>
 
@@ -240,7 +171,7 @@
         <p class="signup-done" id="signupDone">Thanks. Look out for Sunday.</p>
       </div>
       <div class="ftr-col"><h5>Shop</h5>
-        <a href="product.html">Early</a><a href="product.html">Later</a>
+        <a href="product.html?p=early">Early</a><a href="product.html?p=later">Later</a>
         <a href="index.html#range">Starter pair</a><a href="#">Gift subscription</a></div>
       <div class="ftr-col"><h5>Learn</h5>
         <a href="index.html#proof">Our roast</a><a href="#">Brew guides</a>
@@ -250,7 +181,7 @@
         <a href="index.html#subscription">Manage subscription</a><a href="#">Contact</a></div>
     </div>
     <div class="ftr-btm">
-      <span>© 2026 Wide Awake Coffee Co. Bristol, UK.</span>
+      <span>&copy; 2026 Wide Awake Coffee Co. Bristol, UK.</span>
       <span>Concept storefront built by Casey Mungofa</span>
     </div>
   </div>
@@ -259,9 +190,9 @@
 <div class="sheet" id="sheet">
   <div class="sheet-hd">
     <span class="brand"><i></i>WIDE AWAKE</span>
-    <button id="sheetClose" aria-label="Close menu" style="font-size:30px;line-height:1">×</button>
+    <button id="sheetClose" aria-label="Close menu" style="font-size:30px;line-height:1">&times;</button>
   </div>
-  <a href="product.html">Coffee</a>
+  <a href="index.html#range">Coffee</a>
   <a href="index.html#subscription">Subscribe</a>
   <a href="index.html#proof">Our roast</a>
   <a href="index.html#faq">Questions</a>
@@ -272,42 +203,20 @@
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Your bag">
   <div class="drawer-hd"><h3>Your bag</h3>
-    <button id="drawerClose" aria-label="Close bag" style="font-size:28px;line-height:1">×</button></div>
+    <button id="drawerClose" aria-label="Close bag" style="font-size:28px;line-height:1">&times;</button></div>
   <div class="drawer-body" id="drawerBody"><p class="drawer-empty">Nothing in here yet.</p></div>
   <div class="drawer-ft">
-    <div class="total"><span>Subtotal</span><b id="total">£0.00</b></div>
+    <div class="total"><span>Subtotal</span><b id="total">&pound;0.00</b></div>
     <a class="btn btn-primary btn-block" href="#">Checkout</a>
-    <small>Free delivery over £30. Skip or cancel any time.</small>
+    <small>Free delivery over &pound;30. Skip or cancel any time.</small>
   </div>
 </aside>
 
+<!-- catalogue, then the page is built from it, then behaviour binds to the
+     finished page. Order matters: site.js sets up the scroll reveals, so the
+     cards product.js writes have to exist before it runs. -->
+<script src="assets/js/products.js"></script>
+<script src="assets/js/product.js"></script>
 <script src="assets/js/site.js"></script>
-<script>
-/* gallery thumbs + the price note that follows the purchase type */
-(function () {
-  var thumbs = document.getElementById('thumbs');
-  var img = document.getElementById('galImg');
-  var mark = document.getElementById('galMark');
-  if (thumbs && img) {
-    thumbs.addEventListener('click', function (e) {
-      var b = e.target.closest('button');
-      if (!b) return;
-      Array.prototype.forEach.call(thumbs.children, function (c) { c.classList.remove('sel'); });
-      b.classList.add('sel');
-      img.src = b.dataset.src;
-      img.classList.toggle('alt', !b.dataset.mark);
-      if (mark) mark.style.display = b.dataset.mark ? '' : 'none';
-    });
-  }
-  var group = document.querySelector('[data-group="how"]');
-  var note = document.getElementById('priceNote');
-  if (group && note) {
-    group.addEventListener('click', function (e) {
-      var o = e.target.closest('.opt');
-      if (o && o.dataset.note) note.textContent = o.dataset.note;
-    });
-  }
-})();
-</script>
 </body>
 </html>
