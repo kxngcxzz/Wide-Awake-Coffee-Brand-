@@ -22,12 +22,33 @@
   if (!p || !p.gallery) { slug = 'later'; p = DB.later; }
   if (!p) return;
 
-  /* ---------- head ---------- */
+  /* ---------- head ----------
+     The static tags describe Later. Swap them for whichever roast is actually
+     being shown, so a shared link previews the right product. */
+  var here = location.origin + location.pathname + '?p=' + p.slug;
+  var abs  = function (rel) {
+    return location.origin + location.pathname.replace(/[^/]*$/, '') + rel;
+  };
+
   document.title = p.title;
-  var desc = $('meta[name="description"]');
-  if (desc) desc.setAttribute('content', p.meta);
+
+  var setMeta = function (sel, value) {
+    var el = $(sel);
+    if (el && value) el.setAttribute('content', value);
+  };
+
+  setMeta('meta[name="description"]', p.meta);
+  setMeta('meta[property="og:url"]', here);
+  setMeta('meta[property="og:title"]', p.name + ', ' + p.tag.toLowerCase() + ' from ' + p.origin[0].v);
+  setMeta('meta[property="og:description"]', p.meta);
+  setMeta('meta[property="og:image"]', abs(p.og || 'assets/img/og-cover.jpg'));
+  setMeta('meta[property="og:image:alt"]', 'Wide Awake ' + p.name + ', ' + p.tag.toLowerCase());
+  setMeta('meta[name="twitter:title"]', p.name + ', ' + p.tag.toLowerCase() + ' from ' + p.origin[0].v);
+  setMeta('meta[name="twitter:description"]', p.blurb);
+  setMeta('meta[name="twitter:image"]', abs(p.og || 'assets/img/og-cover.jpg'));
+
   var canon = $('link[rel="canonical"]');
-  if (canon) canon.href = location.origin + location.pathname + '?p=' + p.slug;
+  if (canon) canon.href = here;
 
   /* ---------- breadcrumb ---------- */
   var crumb = $('#crumbNow');

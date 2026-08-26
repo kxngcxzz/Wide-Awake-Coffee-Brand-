@@ -16,6 +16,7 @@ window.WA_PRODUCTS = {
     reviews: '612',
     onDark: true,
     markSub: 'DARK ROAST · COLOMBIA',
+    og: 'assets/img/og-later.jpg',
     gallery: [
       { src: 'assets/img/bag-later.jpg',   alt: 'Wide Awake Later, dark roast, 250g',        mark: true, thumbPos: '50% 10%', w: 1160, h: 2074 },
       { src: 'assets/img/roastery.jpg',    alt: 'Beans tipped into the cooling tray', w: 1200, h: 896 },
@@ -68,6 +69,7 @@ window.WA_PRODUCTS = {
     reviews: '428',
     onDark: false,
     markSub: 'LIGHT ROAST · ETHIOPIA',
+    og: 'assets/img/og-early.jpg',
     gallery: [
       { src: 'assets/img/bag-early.jpg', alt: 'Wide Awake Early, light roast, 250g',   mark: true, thumbPos: '50% 12%', w: 1160, h: 2280 },
       { src: 'assets/img/pourover.jpg',  alt: 'Early brewed as a pour over', thumbPos: '50% 62%', w: 1200, h: 896 },
